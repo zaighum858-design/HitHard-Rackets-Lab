@@ -34,18 +34,18 @@ export default function HeroSection({
     onApplyPromoCode('40OFF');
     onNavigateToCatalog('rackets');
   };
-
+  
   // Dynamically select simple graphics based on selected theme
   const heroImage = useMemo(() => {
-    if (theme === 'orange') return "/src/assets/images/hero_racket_orange_graphic_1791386196227.jpg";
-    if (theme === 'mono') return "/src/assets/images/hero_racket_mono_graphic_1791386219401.jpg";
-    return "/src/assets/images/hero_racket_simple_graphic_1791382648876.jpg";
+    if (theme === 'orange') return "/images/hero_racket_orange_graphic_1791386196227.jpg";
+    if (theme === 'mono') return "/images/hero_racket_mono_graphic_1791386219401.jpg";
+    return "/images/hero_racket_simple_graphic_1791382648876.jpg";
   }, [theme]);
 
   const promoImage = useMemo(() => {
-    if (theme === 'orange') return "/src/assets/images/promo_racket_orange_graphic_1791386209811.jpg";
-    if (theme === 'mono') return "/src/assets/images/promo_racket_mono_graphic_1791386230568.jpg";
-    return "/src/assets/images/promo_racket_simple_graphic_1791382668655.jpg";
+    if (theme === 'orange') return "/images/promo_racket_orange_graphic_1791386209811.jpg";
+    if (theme === 'mono') return "/images/promo_racket_mono_graphic_1791386230568.jpg";
+    return "/images/promo_racket_simple_graphic_1791382668655.jpg";
   }, [theme]);
 
   return (

@@ -32,7 +32,7 @@ export const PRODUCTS: Product[] = [
     rating: 4.9,
     reviewsCount: 142,
     description: "Engineered for explosive baseline players. The high-modulus carbon frame offers superior torsion resistance and crisp feedback, generating extreme ball velocity with micro-second dwell times.",
-    image: "/src/assets/images/product_custom_racket_1791381480165.jpg",
+    image: "/images/product_custom_racket_1791381480165.jpg",
     fallbackGradient: "from-[#2C4139] to-[#12221C]",
     specs: {
       "Material": "HM Graphite & Nano-Carbon Tubules",
@@ -59,7 +59,7 @@ export const PRODUCTS: Product[] = [
     rating: 4.8,
     reviewsCount: 96,
     description: "The ultimate lightning-fast frame for badminton champions. High-tension compatible structural rings paired with an ultra-thin aerodynamic shaft for blazing overhead smashes and ultra-quick defense responses.",
-    image: "/src/assets/images/product_saber_racket_1791382227494.jpg",
+    image: "/images/product_saber_racket_1791382227494.jpg",
     fallbackGradient: "from-[#386252] to-[#1E3B30]",
     specs: {
       "Material": "Ultra-Elastic High Flex Carbon",
@@ -86,7 +86,7 @@ export const PRODUCTS: Product[] = [
     rating: 4.9,
     reviewsCount: 68,
     description: "A premium teardrop-shaped Padel racket featuring structured 12K carbon faces and an elastic Soft-EVA core. Delivering supreme tactile control, textured grip surfaces, and robust overhead power.",
-    image: "/src/assets/images/product_padel_racket_1791382243943.jpg",
+    image: "/images/product_padel_racket_1791382243943.jpg",
     fallbackGradient: "from-[#1D2521] to-[#253D32]",
     specs: {
       "Material": "12K Carbon Face & Soft-EVA Core",
@@ -112,7 +112,7 @@ export const PRODUCTS: Product[] = [
     rating: 4.7,
     reviewsCount: 210,
     description: "Monofilament co-polyester strings designed for ultimate durability and heavy, biting spin. Engineered with a pentagonal cross-section that grabs the ball for intense baseline rotation.",
-    image: "/src/assets/images/product_premium_grip_1791381490200.jpg",
+    image: "/images/product_premium_grip_1791381490200.jpg",
     fallbackGradient: "from-[#355A4C] to-[#172D24]",
     specs: {
       "Type": "Co-Polyester Monofilament",
@@ -137,7 +137,7 @@ export const PRODUCTS: Product[] = [
     rating: 5.0,
     reviewsCount: 84,
     description: "The gold standard of tennis feel, comfort, and tension retention. Crafted from premium organic fibers with a proprietary protective coating to offer unmatched pocketing and arm-friendly play.",
-    image: "/src/assets/images/product_vortex_string_1791382262292.jpg",
+    image: "/images/product_vortex_string_1791382262292.jpg",
     fallbackGradient: "from-[#4B5E55] to-[#2F4138]",
     specs: {
       "Type": "Natural Gut Collagen Fibers",
@@ -162,7 +162,7 @@ export const PRODUCTS: Product[] = [
     rating: 4.9,
     reviewsCount: 320,
     description: "Ultra-absorbent polyurethane overgrips with an ultra-tacky polyurethane feel. Specially treated with quick-drying micro-pores to maintain perfect grip dry-friction, even in high sweat conditions.",
-    image: "/src/assets/images/product_premium_grip_1791381490200.jpg",
+    image: "/images/product_premium_grip_1791381490200.jpg",
     fallbackGradient: "from-[#2A443A] to-[#12261E]",
     specs: {
       "Material": "Polyurethane Micro-pore Felt",
@@ -188,7 +188,7 @@ export const PRODUCTS: Product[] = [
     rating: 4.6,
     reviewsCount: 105,
     description: "A premium perforated grip roll offering pure moisture dispersion. Features a distinct raised hexagonal spine that enhances finger anchor positions for exceptional rotational stability.",
-    image: "/src/assets/images/product_hexa_grip_1791382279237.jpg",
+    image: "/images/product_hexa_grip_1791382279237.jpg",
     fallbackGradient: "from-[#1D2B24] to-[#0D1612]",
     specs: {
       "Material": "Ribbed Perforated EVA Core Poly",
@@ -211,7 +211,7 @@ export const PRODUCTS: Product[] = [
     rating: 4.8,
     reviewsCount: 154,
     description: "Dual-density hexagonal silicone dampeners that span across the center main strings. Dramatically reduces high-frequency frame ping and resonance without muting the organic feel of the string bed.",
-    image: "/src/assets/images/product_premium_grip_1791381490200.jpg", // Neat fallback to premium accessories image
+    image: "/images/product_premium_grip_1791381490200.jpg", // Neat fallback to premium accessories image
     fallbackGradient: "from-[#314A3E] to-[#192D24]",
     specs: {
       "Material": "High-Grade Shock Silicone",
@@ -234,7 +234,7 @@ export const PRODUCTS: Product[] = [
     rating: 4.7,
     reviewsCount: 184,
     description: "Premium pressurized tennis balls built for ultimate visibility and hard-court durability. Feature high-grade felt with water-resistant treatment for consistent aerodynamic flight and bounce.",
-    image: "/src/assets/images/product_tennis_balls_1791382295426.jpg",
+    image: "/images/product_tennis_balls_1791382295426.jpg",
     fallbackGradient: "from-[#20362C] to-[#0F1E18]",
     specs: {
       "Approval": "ITF & USTA Approved for Matchplay",
@@ -258,7 +258,7 @@ export const PRODUCTS: Product[] = [
     rating: 4.9,
     reviewsCount: 112,
     description: "The ultimate gear companion. Built with heavy-duty waterproof ballistic nylon and absolute compartment organization. Features a thermally-insulated compartment that shields up to 3 rackets from extreme weather and string creep.",
-    image: "/src/assets/images/product_tactical_bag_1791382316016.jpg",
+    image: "/images/product_tactical_bag_1791382316016.jpg",
     fallbackGradient: "from-[#263D34] to-[#14231E]",
     specs: {
       "Material": "1200D Waterproof Ballistic Nylon",
