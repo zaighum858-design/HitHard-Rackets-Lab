@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+/* 🚀 Define Tailwind v4 Custom Theme Variables mapped to CSS Properties */
+@theme {
+  --color-theme-bg: var(--bg-canvas);
+  --color-theme-text: var(--text-main);
+  --color-theme-muted: var(--text-muted);
+  
+  --color-theme-primary: var(--color-primary);
+  --color-theme-primary-hover: var(--color-primary-hover);
+  --color-theme-accent: var(--color-accent);
+  --color-theme-accent-hover: var(--color-accent-hover);
+  
+  --color-theme-on-primary: var(--text-on-primary);
+  --color-theme-on-accent: var(--text-on-accent);
+  
+  --color-theme-dark: var(--color-dark);
+  --color-theme-card: var(--color-card);
+  --color-theme-border: var(--color-border);
+  --color-theme-sidebar: var(--color-sidebar);
+}
+
+/* 1. Default Theme (Forest Teal & Warm Cream) */
+:root {
+  --bg-canvas: #F8F9F5;
+  --text-main: #1E2824;
+  --text-muted: #5C7166;
+  
+  --color-primary: #253F36;
+  --color-primary-hover: #1C3227;
+  --color-accent: #AEEB99;
+  --color-accent-hover: #C2F3B2;
+  
+  --text-on-primary: #F8F9F5;
+  --text-on-accent: #111613;
+  
+  --color-dark: #111613;
+  --color-card: #FFFFFF;
+  --color-border: #E8ECE8;
+  --color-sidebar: #111613;
+}
+
+/* 2. Black & Orange Theme (High-Contrast Blaze Orange) */
+[data-theme="orange"] {
+  /* --bg-canvas: #09090B; */
+  --text-main: #FAFAFA;
+  --text-muted: #A1A1AA;
+  
+  --color-primary: #EA580C; /* Blaze Orange */
+  --color-primary-hover: #C2410C;
+  --color-accent: #F97316;
+  --color-accent-hover: #FB923C;
+  
+  --text-on-primary: #09090B;
+  --text-on-accent: #09090B;
+  
+  --color-dark: #000000;
+  --color-card: #18181B;
+  --color-border: #27272A;
+  --color-sidebar: #000000;
+}
+
+/* 3. Black & White Theme (Monochromatic Contrast) */
+[data-theme="mono"] {
+  --bg-canvas: #FFFFFF;
+  --text-main: #000000;
+  --text-muted: #71717A;
+  
+  --color-primary: #000000;
+  --color-primary-hover: #1E1E1E;
+  --color-accent: #FFFFFF;          /* Accent maps to solid white for perfect contrast on dark containers */
+  --color-accent-hover: #E4E4E7;
+  
+  --text-on-primary: #FFFFFF;
+  --text-on-accent: #000000;
+  
+  --color-dark: #000000;
+  --color-card: #FFFFFF;
+  --color-border: #E4E4E7;
+  --color-sidebar: #000000;
+}

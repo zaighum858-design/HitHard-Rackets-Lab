@@ -1,0 +1,6 @@
+{
+  "name": "HitHard Rackets & Lab",
+  "description": "Premium sports boutique e-commerce for high-performance rackets, customized grips, precision strings, and elite court accessories.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
