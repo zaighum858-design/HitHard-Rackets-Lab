@@ -8,6 +8,7 @@ interface SidebarProps {
   openCart: () => void;
   openProfile: () => void;
   onGetNewArrival: () => void;
+  currentUser: { email: string; name: string } | null;
 }
 
 export default function Sidebar({
@@ -17,7 +18,8 @@ export default function Sidebar({
   cartCount,
   openCart,
   openProfile,
-  onGetNewArrival
+  onGetNewArrival,
+  currentUser
 }: SidebarProps) {
 
   // Dynamically calculate icon/button color schemes to ensure perfect contrast against the black sidebar
@@ -148,23 +150,31 @@ export default function Sidebar({
         {/* Bottom: Player Profile Avatar Trigger (from mockup) */}
         <div className="relative group cursor-pointer" onClick={openProfile}>
           <div className="w-13 h-13 rounded-full overflow-hidden border-2 border-white/10 hover:border-white transition-colors duration-300 shadow-md">
-            <img 
-              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200" 
-              alt="Player Profile Avatar" 
-              className="w-full h-full object-cover"
-              referrerPolicy="no-referrer"
-              onError={(e) => {
-                (e.target as HTMLElement).style.display = 'none';
-              }}
-            />
-            {/* Fallback avatar */}
-            <div className="w-full h-full bg-white/15 flex items-center justify-center text-white font-bold text-sm">
-              PL
-            </div>
+            {currentUser ? (
+              <>
+                <img 
+                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200" 
+                  alt="Player Profile Avatar" 
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                  onError={(e) => {
+                    (e.target as HTMLElement).style.display = 'none';
+                  }}
+                />
+                {/* Fallback avatar */}
+                <div className="w-full h-full bg-white/15 flex items-center justify-center text-white font-bold text-xs uppercase">
+                  {currentUser.name.substring(0, 2)}
+                </div>
+              </>
+            ) : (
+              <div className="w-full h-full bg-zinc-850 flex items-center justify-center text-zinc-400 group-hover:text-white transition-colors duration-200">
+                <User className="w-5 h-5" />
+              </div>
+            )}
           </div>
-          <div className="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-emerald-400 border-2 border-[#111613] shadow-sm"></div>
+          <div className={`absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full border-2 border-[#111613] shadow-sm transition-all duration-300 ${currentUser ? 'bg-emerald-450 animate-pulse' : 'bg-amber-500'}`}></div>
           <span className="absolute left-17 bottom-2 bg-theme-accent text-[#111613] text-[11px] font-black px-3.5 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0 whitespace-nowrap pointer-events-none shadow-xl border border-theme-accent/40 z-50 uppercase tracking-wider">
-            Player Tuning Specs
+            {currentUser ? 'Player Tuning Specs' : 'Player Portal (Sign In)'}
           </span>
         </div>
       </div>

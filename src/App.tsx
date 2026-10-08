@@ -46,8 +46,13 @@ export default function App() {
   const [favorites, setFavorites] = useState<string[]>(['racket-volt', 'string-chrono']); // seed values
 
   // Active User Profile Alignments
+  const [currentUser, setCurrentUser] = useState<{ email: string; name: string } | null>({
+    email: 'zaighum858@gmail.com',
+    name: 'ZAIGHUM'
+  });
+
   const [playerProfile, setPlayerProfile] = useState({
-    name: 'TENNIS PRO CHAMP',
+    name: 'ZAIGHUM',
     playStyle: 'Aggressive Baseline',
     hand: 'Right-Handed',
     gripSize: '4 3/8 (L3)',
@@ -249,6 +254,7 @@ export default function App() {
         openCart={() => setIsCartOpen(true)}
         openProfile={() => setIsProfileOpen(true)}
         onGetNewArrival={handleGetNewArrival}
+        currentUser={currentUser}
       />
 
       {/* Main Viewport Content Pane */}
@@ -312,6 +318,8 @@ export default function App() {
           onClose={() => setIsProfileOpen(false)}
           playerProfile={playerProfile}
           setPlayerProfile={setPlayerProfile}
+          currentUser={currentUser}
+          setCurrentUser={setCurrentUser}
         />
       )}
 
