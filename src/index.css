@@ -2,6 +2,9 @@
 
 /* 🚀 Define Tailwind v4 Custom Theme Variables mapped to CSS Properties */
 @theme {
+  --font-sans: 'Poppins', sans-serif;
+  --font-display: 'Poppins', sans-serif;
+  
   --color-theme-bg: var(--bg-canvas);
   --color-theme-text: var(--text-main);
   --color-theme-muted: var(--text-muted);

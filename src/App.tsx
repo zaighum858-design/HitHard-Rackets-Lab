@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { LogIn, UserPlus, User, LogOut } from 'lucide-react';
 import Sidebar from './components/Sidebar';
 import HeroSection from './components/HeroSection';
 import CatalogSection from './components/CatalogSection';
@@ -45,19 +46,31 @@ export default function App() {
   // Favorites Saved List
   const [favorites, setFavorites] = useState<string[]>(['racket-volt', 'string-chrono']); // seed values
 
-  // Active User Profile Alignments
-  const [currentUser, setCurrentUser] = useState<{ email: string; name: string } | null>({
-    email: 'zaighum858@gmail.com',
-    name: 'ZAIGHUM'
-  });
+  // Authenticated User State (defaults to null so Login / Sign Up buttons are clearly visible)
+  const [currentUser, setCurrentUser] = useState<{ email: string; name: string } | null>(null);
+  const [authModalTab, setAuthModalTab] = useState<'signin' | 'signup'>('signin');
 
   const [playerProfile, setPlayerProfile] = useState({
-    name: 'ZAIGHUM',
+    name: 'GUEST PLAYER',
     playStyle: 'Aggressive Baseline',
     hand: 'Right-Handed',
     gripSize: '4 3/8 (L3)',
     surface: 'Hard-Court'
   });
+
+  const handleOpenSignIn = () => {
+    setAuthModalTab('signin');
+    setIsProfileOpen(true);
+  };
+
+  const handleOpenSignUp = () => {
+    setAuthModalTab('signup');
+    setIsProfileOpen(true);
+  };
+
+  const handleLogOut = () => {
+    setCurrentUser(null);
+  };
 
   // Modal & Drawer Toggle States
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -255,6 +268,8 @@ export default function App() {
         openProfile={() => setIsProfileOpen(true)}
         onGetNewArrival={handleGetNewArrival}
         currentUser={currentUser}
+        onOpenSignIn={handleOpenSignIn}
+        onOpenSignUp={handleOpenSignUp}
       />
 
       {/* Main Viewport Content Pane */}
@@ -262,6 +277,48 @@ export default function App() {
         id="main-viewport-pane"
         className="flex-1 rounded-[32px] p-2 md:p-0 z-10 w-full min-h-[calc(100vh-4rem)] relative"
       >
+        {/* Top-Right Auth Pill Bar for Non-Home Views */}
+        {currentView !== 'home' && (
+          <div className="w-full flex justify-end items-center mb-2 pb-2">
+            {currentUser ? (
+              <div className="flex items-center gap-2 bg-theme-card border border-theme-border px-3 py-1.5 rounded-full shadow-xs">
+                <button
+                  onClick={() => setIsProfileOpen(true)}
+                  className="flex items-center gap-1.5 text-xs font-bold uppercase text-theme-text hover:text-theme-primary transition-colors cursor-pointer"
+                >
+                  <User className="w-3.5 h-3.5 text-theme-primary" />
+                  <span>{currentUser.name}</span>
+                  <span className="text-[9px] bg-theme-primary/10 text-theme-primary font-black px-1.5 py-0.5 rounded">PRO</span>
+                </button>
+                <div className="h-3 w-px bg-theme-border"></div>
+                <button
+                  onClick={handleLogOut}
+                  className="text-[11px] text-theme-muted hover:text-theme-text font-bold uppercase cursor-pointer transition-colors"
+                >
+                  Log Out
+                </button>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={handleOpenSignIn}
+                  className="bg-theme-card hover:bg-theme-card/80 text-theme-text border border-theme-border px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1.5 shadow-xs"
+                >
+                  <LogIn className="w-3.5 h-3.5 text-theme-primary" />
+                  <span>Log In</span>
+                </button>
+                <button
+                  onClick={handleOpenSignUp}
+                  className="bg-theme-primary hover:bg-theme-primary-hover text-theme-on-primary px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider transition-all cursor-pointer shadow-sm flex items-center gap-1.5"
+                >
+                  <UserPlus className="w-3.5 h-3.5" />
+                  <span>Sign Up</span>
+                </button>
+              </div>
+            )}
+          </div>
+        )}
+
         {currentView === 'home' && (
           <HeroSection
             theme={theme}
@@ -269,6 +326,11 @@ export default function App() {
             onNavigateToCatalog={handleNavigateToCatalog}
             onApplyPromoCode={handleApplyPromoCode}
             onOpenFilterDrawer={handleOpenFilterDrawer}
+            currentUser={currentUser}
+            onOpenSignIn={handleOpenSignIn}
+            onOpenSignUp={handleOpenSignUp}
+            onOpenProfile={() => setIsProfileOpen(true)}
+            onLogOut={handleLogOut}
           />
         )}
 
@@ -320,6 +382,7 @@ export default function App() {
           setPlayerProfile={setPlayerProfile}
           currentUser={currentUser}
           setCurrentUser={setCurrentUser}
+          initialAuthTab={authModalTab}
         />
       )}
 

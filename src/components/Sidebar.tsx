@@ -1,4 +1,4 @@
-import { Home, ShoppingBag, Heart, User, Sparkles, Hammer } from 'lucide-react';
+import { Home, ShoppingBag, Heart, User, Sparkles, Hammer, LogIn } from 'lucide-react';
 
 interface SidebarProps {
   theme: 'default' | 'orange' | 'mono';
@@ -9,6 +9,8 @@ interface SidebarProps {
   openProfile: () => void;
   onGetNewArrival: () => void;
   currentUser: { email: string; name: string } | null;
+  onOpenSignIn?: () => void;
+  onOpenSignUp?: () => void;
 }
 
 export default function Sidebar({
@@ -19,7 +21,9 @@ export default function Sidebar({
   openCart,
   openProfile,
   onGetNewArrival,
-  currentUser
+  currentUser,
+  onOpenSignIn,
+  onOpenSignUp
 }: SidebarProps) {
 
   // Dynamically calculate icon/button color schemes to ensure perfect contrast against the black sidebar
@@ -147,11 +151,11 @@ export default function Sidebar({
           </button>
         </nav>
 
-        {/* Bottom: Player Profile Avatar Trigger (from mockup) */}
-        <div className="relative group cursor-pointer" onClick={openProfile}>
-          <div className="w-13 h-13 rounded-full overflow-hidden border-2 border-white/10 hover:border-white transition-colors duration-300 shadow-md">
-            {currentUser ? (
-              <>
+        {/* Bottom: Player Profile or Prominent Sign In Button */}
+        <div className="flex flex-col items-center gap-2 w-full px-1">
+          {currentUser ? (
+            <div className="relative group cursor-pointer" onClick={openProfile}>
+              <div className="w-13 h-13 rounded-full overflow-hidden border-2 border-white/10 hover:border-white transition-colors duration-300 shadow-md">
                 <img 
                   src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200" 
                   alt="Player Profile Avatar" 
@@ -165,17 +169,22 @@ export default function Sidebar({
                 <div className="w-full h-full bg-white/15 flex items-center justify-center text-white font-bold text-xs uppercase">
                   {currentUser.name.substring(0, 2)}
                 </div>
-              </>
-            ) : (
-              <div className="w-full h-full bg-zinc-850 flex items-center justify-center text-zinc-400 group-hover:text-white transition-colors duration-200">
-                <User className="w-5 h-5" />
               </div>
-            )}
-          </div>
-          <div className={`absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full border-2 border-[#111613] shadow-sm transition-all duration-300 ${currentUser ? 'bg-emerald-450 animate-pulse' : 'bg-amber-500'}`}></div>
-          <span className="absolute left-17 bottom-2 bg-theme-accent text-[#111613] text-[11px] font-black px-3.5 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0 whitespace-nowrap pointer-events-none shadow-xl border border-theme-accent/40 z-50 uppercase tracking-wider">
-            {currentUser ? 'Player Tuning Specs' : 'Player Portal (Sign In)'}
-          </span>
+              <div className="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full border-2 border-[#111613] shadow-sm bg-emerald-450 animate-pulse"></div>
+              <span className="absolute left-17 bottom-2 bg-theme-accent text-[#111613] text-[11px] font-black px-3.5 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0 whitespace-nowrap pointer-events-none shadow-xl border border-theme-accent/40 z-50 uppercase tracking-wider">
+                {currentUser.name} (Specs)
+              </span>
+            </div>
+          ) : (
+            <button
+              onClick={onOpenSignIn || openProfile}
+              className="w-full bg-theme-accent hover:opacity-95 text-[#111613] py-2.5 px-1 rounded-2xl flex flex-col items-center justify-center gap-1 shadow-md hover:scale-105 transition-all cursor-pointer group"
+              title="Click to Log In or Sign Up"
+            >
+              <LogIn className="w-4 h-4 text-[#111613]" />
+              <span className="text-[9px] font-black tracking-wider leading-none">SIGN IN</span>
+            </button>
+          )}
         </div>
       </div>
 

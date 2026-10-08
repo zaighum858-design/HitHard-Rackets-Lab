@@ -1,4 +1,4 @@
-import { Search, SlidersHorizontal, Instagram, ArrowUpRight, Flame, Trophy, Percent } from 'lucide-react';
+import { Search, SlidersHorizontal, Instagram, ArrowUpRight, Flame, Trophy, Percent, LogIn, UserPlus, User, LogOut } from 'lucide-react';
 import { useState, useMemo } from 'react';
 
 interface HeroSectionProps {
@@ -7,6 +7,11 @@ interface HeroSectionProps {
   onNavigateToCatalog: (category?: string) => void;
   onApplyPromoCode: (code: string) => void;
   onOpenFilterDrawer: () => void;
+  currentUser?: { email: string; name: string } | null;
+  onOpenSignIn?: () => void;
+  onOpenSignUp?: () => void;
+  onOpenProfile?: () => void;
+  onLogOut?: () => void;
 }
 
 export default function HeroSection({
@@ -14,7 +19,12 @@ export default function HeroSection({
   onSearchSubmit,
   onNavigateToCatalog,
   onApplyPromoCode,
-  onOpenFilterDrawer
+  onOpenFilterDrawer,
+  currentUser,
+  onOpenSignIn,
+  onOpenSignUp,
+  onOpenProfile,
+  onLogOut
 }: HeroSectionProps) {
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -50,16 +60,63 @@ export default function HeroSection({
 
   return (
     <section className="flex-1 flex flex-col gap-6 select-none h-[calc(100vh-2rem)] overflow-y-auto pr-2">
-      {/* Top Banner (Slim & Muted, Section 2.C Rule) */}
-      <div className="bg-theme-sidebar text-theme-bg text-xs font-semibold py-2.5 px-6 rounded-[16px] flex items-center justify-between border border-theme-border/30">
+      {/* Top Banner with Promo Code & Direct Login / Sign Up Actions */}
+      <div className="bg-theme-sidebar text-theme-bg text-xs font-semibold py-2 px-4 sm:px-6 rounded-[16px] flex flex-wrap items-center justify-between gap-3 border border-theme-border/30">
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-theme-accent animate-ping"></span>
           <span className="text-theme-accent font-mono tracking-wide uppercase">Tuning Lab Active</span>
-          <span className="text-theme-muted">·</span>
-          <span>Order today for free express delivery on orders over $50</span>
+          <span className="text-theme-muted hidden sm:inline">·</span>
+          <span className="hidden md:inline">Order today for free express delivery on orders over $50</span>
         </div>
-        <div className="flex items-center gap-4 text-xs font-mono text-theme-accent">
-          <span>CODE: <strong className="underline decoration-dotted font-bold">40OFF</strong> (40% OFF RACKETS)</span>
+        
+        <div className="flex items-center gap-3">
+          <span className="text-xs font-mono text-theme-accent hidden sm:inline">
+            CODE: <strong className="underline decoration-dotted font-bold">40OFF</strong>
+          </span>
+
+          <div className="h-4 w-px bg-white/20 hidden sm:block"></div>
+
+          {/* Prominent Login & Sign Up Buttons */}
+          {currentUser ? (
+            <div className="flex items-center gap-2">
+              <button
+                onClick={onOpenProfile}
+                className="flex items-center gap-1.5 bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-full text-xs font-bold uppercase transition-all cursor-pointer border border-white/15"
+                title="View Profile Specs"
+              >
+                <User className="w-3.5 h-3.5 text-theme-accent" />
+                <span>{currentUser.name}</span>
+                <span className="text-[9px] bg-theme-accent text-theme-dark font-black px-1.5 py-0.5 rounded">PRO</span>
+              </button>
+              {onLogOut && (
+                <button
+                  onClick={onLogOut}
+                  className="text-xs text-zinc-400 hover:text-white px-2 py-1 uppercase font-semibold transition-colors cursor-pointer flex items-center gap-1"
+                  title="Sign Out"
+                >
+                  <LogOut className="w-3 h-3" />
+                  <span className="hidden sm:inline">Log Out</span>
+                </button>
+              )}
+            </div>
+          ) : (
+            <div className="flex items-center gap-2">
+              <button
+                onClick={onOpenSignIn}
+                className="bg-white/10 hover:bg-white/20 text-white px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all cursor-pointer border border-white/20 flex items-center gap-1.5 hover:scale-102"
+              >
+                <LogIn className="w-3.5 h-3.5 text-theme-accent" />
+                <span>Log In</span>
+              </button>
+              <button
+                onClick={onOpenSignUp}
+                className="bg-theme-accent hover:opacity-90 text-theme-dark px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider transition-all cursor-pointer shadow-sm flex items-center gap-1.5 hover:scale-102"
+              >
+                <UserPlus className="w-3.5 h-3.5" />
+                <span>Sign Up</span>
+              </button>
+            </div>
+          )}
         </div>
       </div>
 
@@ -73,7 +130,7 @@ export default function HeroSection({
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none"></div>
 
           {/* Top Controls Bar inside the teal panel */}
-          <div className="flex items-center justify-between w-full relative z-10 gap-4">
+          <div className="flex items-center justify-between w-full relative z-10 gap-4 flex-wrap">
             
             {/* Instagram Social Handler Badge */}
             <a 
@@ -88,10 +145,10 @@ export default function HeroSection({
               <span className="text-sm font-semibold tracking-tight hidden sm:inline">@hithard_rackets</span>
             </a>
 
-            {/* Search Input and Filter button Group */}
-            <div className="flex items-center gap-2 max-w-md w-full sm:w-auto">
+            {/* Search Input, Filter button, and Hero Auth Buttons */}
+            <div className="flex items-center gap-2 max-w-xl w-full sm:w-auto flex-wrap">
               {/* Search Capsule */}
-              <div className="flex-1 sm:w-64 flex items-center gap-2 bg-theme-dark/35 border border-theme-border/10 rounded-full px-4.5 py-2.5 backdrop-blur-md focus-within:border-theme-accent/50 focus-within:ring-1 focus-within:ring-theme-accent/30 transition-all">
+              <div className="flex-1 sm:w-56 flex items-center gap-2 bg-theme-dark/35 border border-theme-border/10 rounded-full px-4.5 py-2.5 backdrop-blur-md focus-within:border-theme-accent/50 focus-within:ring-1 focus-within:ring-theme-accent/30 transition-all">
                 <input
                   type="text"
                   placeholder="SEARCH ACCESSORIES..."
@@ -103,7 +160,7 @@ export default function HeroSection({
                 <button 
                   onClick={triggerSearch}
                   aria-label="Submit search"
-                  className="text-theme-muted hover:text-theme-accent transition-colors"
+                  className="text-theme-muted hover:text-theme-accent transition-colors cursor-pointer"
                 >
                   <Search className="w-4.5 h-4.5" />
                 </button>
@@ -117,6 +174,34 @@ export default function HeroSection({
               >
                 <SlidersHorizontal className="w-4.5 h-4.5" />
               </button>
+
+              {/* In-Hero Direct Auth Action Buttons */}
+              {!currentUser ? (
+                <div className="flex items-center gap-1.5 pl-1">
+                  <button
+                    onClick={onOpenSignIn}
+                    className="bg-theme-dark/45 hover:bg-theme-dark/75 text-white border border-theme-border/20 px-3.5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all cursor-pointer backdrop-blur-md hover:border-theme-accent/50 flex items-center gap-1.5 shadow-sm"
+                  >
+                    <LogIn className="w-4 h-4 text-theme-accent" />
+                    <span>Log In</span>
+                  </button>
+                  <button
+                    onClick={onOpenSignUp}
+                    className="bg-theme-accent hover:opacity-95 text-theme-dark px-4 py-2.5 rounded-full text-xs font-black uppercase tracking-wider transition-all cursor-pointer shadow-md hover:scale-102 flex items-center gap-1.5"
+                  >
+                    <UserPlus className="w-4 h-4" />
+                    <span>Sign Up</span>
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={onOpenProfile}
+                  className="flex items-center gap-2 bg-theme-dark/45 border border-theme-border/20 text-white px-4 py-2.5 rounded-full text-xs font-bold uppercase backdrop-blur-md hover:border-theme-accent cursor-pointer shadow-sm"
+                >
+                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></div>
+                  <span>{currentUser.name}</span>
+                </button>
+              )}
             </div>
           </div>
 

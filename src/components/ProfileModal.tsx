@@ -13,6 +13,7 @@ interface ProfileModalProps {
   setPlayerProfile: (profile: any) => void;
   currentUser: { email: string; name: string } | null;
   setCurrentUser: (user: { email: string; name: string } | null) => void;
+  initialAuthTab?: 'signin' | 'signup';
 }
 
 export default function ProfileModal({
@@ -20,10 +21,11 @@ export default function ProfileModal({
   playerProfile,
   setPlayerProfile,
   currentUser,
-  setCurrentUser
+  setCurrentUser,
+  initialAuthTab = 'signin'
 }: ProfileModalProps) {
   // Authentication tab state ('signin' | 'signup')
-  const [authTab, setAuthTab] = useState<'signin' | 'signup'>('signin');
+  const [authTab, setAuthTab] = useState<'signin' | 'signup'>(initialAuthTab);
   
   // Form input states
   const [email, setEmail] = useState('');
@@ -304,6 +306,28 @@ export default function ProfileModal({
                     className="mt-2 py-3 bg-theme-primary hover:bg-theme-primary-hover text-theme-on-primary text-xs font-black tracking-widest uppercase rounded-xl transition-all cursor-pointer text-center shadow-md hover:shadow-lg"
                   >
                     SIGN INTO BOUTIQUE TUNING
+                  </button>
+
+                  <div className="flex items-center gap-2 my-1">
+                    <div className="h-px bg-theme-border flex-1"></div>
+                    <span className="text-[10px] font-mono text-theme-muted uppercase">or</span>
+                    <div className="h-px bg-theme-border flex-1"></div>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setCurrentUser({
+                        email: 'zaighum858@gmail.com',
+                        name: 'ZAIGHUM'
+                      });
+                      setName('ZAIGHUM');
+                      setSuccessMsg('SIGNED IN AS ZAIGHUM!');
+                      setTimeout(() => setSuccessMsg(''), 1500);
+                    }}
+                    className="py-2.5 px-3 bg-theme-primary/10 hover:bg-theme-primary/20 text-theme-primary border border-theme-primary/30 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-2"
+                  >
+                    ⚡ Instant Demo Sign-In (Zaighum)
                   </button>
 
                   <p className="text-[10px] text-theme-muted text-center leading-normal uppercase tracking-wider mt-1 select-none">
